@@ -2,13 +2,20 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/**
+ * Class ApiTest
+ * @package Tests\Feature
+ * @group api
+ */
 class ApiTest extends TestCase
 {
-    use refreshDatabase;
+//    use refreshDatabase;
 
+    /**
+     *
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -23,5 +30,39 @@ class ApiTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /** @test */
+    public function should_visit_widget_endpoint()
+    {
+        $response = $this->get('/api/v1/widgets');
+
+        $this->assertSame("widgets", ($response->json()["endpoint"]));
+
+        $this->assertResultHasKey($response, "data");
+
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function should_return_requested_record()
+    {
+        $id = 1;
+        $response = $this->get("/api/v1/widgets/{$id}");
+        $data = $this->getData($response);
+
+        $this->assertSame($id, $data->id);
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @param $response
+     * @return mixed
+     */
+    public function getData($response)
+    {
+        return json_decode($response->getContent())->data;
+    }
+
 
 }

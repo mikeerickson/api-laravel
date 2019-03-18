@@ -18,10 +18,11 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "pre-commit": "npm run test",
+        "test": "npm run test:unit && npm run test:feature",
+        "test:api": "./vessel test --group api",
+        "test:feature": "./vessel test --group api",
         "test:unit": "vendor/bin/phpunit --testsuite Unit",
-        "test:feature": "vendor/bin/phpunit --testsuite Feature",
-        "test": "vendor/bin/phpunit --testsuite Unit"
+        "pre-commit": "npm run test"
     },
     "devDependencies": {
         "@commitlint/cli": "7.5.2",

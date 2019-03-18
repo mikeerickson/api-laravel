@@ -42,7 +42,9 @@ class WidgetController extends Controller
      */
     public function show($id)
     {
-        //
+//        var_dump($id);
+        $widget = Widget::findOrFail($id);
+        return response(["data" => $widget]);
     }
 
     /**
