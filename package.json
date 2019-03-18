@@ -22,7 +22,7 @@
         "test:api": "./vessel test --group api",
         "test:feature": "./vessel test --group api",
         "test:unit": "vendor/bin/phpunit --testsuite Unit",
-        "pre-commit": "npm run test"
+        "pre-commit": "npm run test:unit"
     },
     "devDependencies": {
         "@commitlint/cli": "7.5.2",

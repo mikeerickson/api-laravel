@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Widget;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 /**
@@ -11,7 +13,7 @@ use Tests\TestCase;
  */
 class ApiTest extends TestCase
 {
-//    use refreshDatabase;
+    use refreshDatabase;
 
     /**
      *
@@ -19,8 +21,6 @@ class ApiTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->withoutExceptionHandling();
     }
 
     /** @test */
@@ -34,25 +34,18 @@ class ApiTest extends TestCase
     /** @test */
     public function should_visit_widget_endpoint()
     {
+        factory(Widget::class, 5)->create();
+
         $response = $this->get('/api/v1/widgets');
 
         $this->assertSame("widgets", ($response->json()["endpoint"]));
 
         $this->assertResultHasKey($response, "data");
 
-        $response->assertStatus(200);
-    }
-
-    /** @test */
-    public function should_return_requested_record()
-    {
-        $id = 1;
-        $response = $this->get("/api/v1/widgets/{$id}");
         $data = $this->getData($response);
 
-        $this->assertSame($id, $data->id);
-
         $response->assertStatus(200);
+        $this->assertSame(5, count($data));
     }
 
     /**
@@ -64,5 +57,18 @@ class ApiTest extends TestCase
         return json_decode($response->getContent())->data;
     }
 
+    /** @test */
+    public function should_visit_widget_endpoint_and_return_requested_record()
+    {
+
+        $id = factory(Widget::class)->create()->id;
+
+        $response = $this->get("/api/v1/widgets/{$id}");
+        $data = $this->getData($response);
+
+        $this->assertSame($id, $data->id);
+
+        $response->assertStatus(200);
+    }
 
 }
