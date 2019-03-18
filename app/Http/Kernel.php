@@ -35,14 +35,14 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-//            \Barryvdh\Cors\HandleCors::class,
+            \Barryvdh\Cors\HandleCors::class
         ],
 
         'api' => [
             \Barryvdh\Cors\HandleCors::class,
             'throttle:60,1',
             'bindings',
-            'api.logger'    => \App\Http\Middleware\ApiLogger::class,
+            'api.logger' => \App\Http\Middleware\ApiLogger::class,
             'api.rateLimit' => \App\Http\Middleware\ApiRateLimit::class,
 //            'api.verify'    => \App\Http\Middleware\ApiVerifyEndpoint::class,
         ],

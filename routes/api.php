@@ -26,8 +26,8 @@ $middleware = [
 
 Route::group(['prefix' => 'v1', 'middleware' => $middleware], function () {
 
-    Route::get('/teams', ['as'=>'teams', 'uses'=>'TeamController@index']);
-    Route::get('/teams/{id}', ['as'=>'teams.detail', 'uses'=>'TeamController@show']);
-    Route::post('/teams', ['as'=>'teams.store', 'uses'=>'TeamController@store']);
+    Route::get('/widgets', ['as' => 'widgets', 'uses' => 'WidgetController@index']);
+//    Route::get('/teams/{id}', ['as' => 'teams.detail', 'uses' => 'TeamController@show']);
+//    Route::post('/teams', ['as' => 'teams.store', 'uses' => 'TeamController@store']);
 
 });
