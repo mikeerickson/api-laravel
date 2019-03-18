@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateWidgetsTable extends Migration
 {
@@ -15,6 +15,9 @@ class CreateWidgetsTable extends Migration
     {
         Schema::create('widgets', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('key');
+            $table->string('value');
+            $table->json('meta');
             $table->timestamps();
         });
     }

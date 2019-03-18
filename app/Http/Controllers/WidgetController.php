@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Widget;
 use Illuminate\Http\Request;
 
 class WidgetController extends Controller
@@ -18,7 +19,7 @@ class WidgetController extends Controller
             "status_code" => 200,
             "endpoint" => "widgets",
             "requested_at" => now(),
-            "data" => ["message" => "Hello World"]
+            "data" => Widget::all()
         ]);
     }
 

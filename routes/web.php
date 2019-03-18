@@ -29,3 +29,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => $middleware], function () {
 //    Route::post('/teams', ['as' => 'teams.store', 'uses' => 'TeamController@store']);
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
