@@ -16,3 +16,18 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+$middleware = [
+    'api.logger',
+    'api.rateLimit',
+    'api.verify',
+    'api'
+];
+
+Route::group(['prefix' => 'v1', 'middleware' => $middleware], function () {
+
+    Route::get('/teams', ['as'=>'teams', 'uses'=>'TeamController@index']);
+    Route::get('/teams/{id}', ['as'=>'teams.detail', 'uses'=>'TeamController@show']);
+    Route::post('/teams', ['as'=>'teams.store', 'uses'=>'TeamController@store']);
+
+});
